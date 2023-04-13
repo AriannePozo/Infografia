@@ -120,19 +120,11 @@ class TransformWindow(arcade.Window):
     def actualizar_cola(self):
         if len(self.segments_tail) > 1:
             for i in range(len(self.segments_tail) - 1, 0, -1):
-                tail = self.snake_tail[i]
-                prev_tail = self.snake_tail[i - 1]
-                dx = tail.center_x - prev_tail.center_x
-                dy = tail.center_y - prev_tail.center_y
-                if dx > 0:
-                    tail.center_x = prev_tail.center_x + 10
-                elif dx < 0:
-                    tail.center_x = prev_tail.center_x - 10
-                elif dy > 0:
-                    tail.center_y = prev_tail.center_y + 10
-                elif dy < 0:
-                    tail.center_y = prev_tail.center_y - 10
-                self.segments_tail[i] = (tail.center_x, tail.center_y)
+                tail = self.snake_tail[i - 1]
+                center_x, center_y = self.segments_tail[i - 1]
+                self.segments_tail[i] = (center_x, center_y)
+                tail.center_x = center_x
+                tail.center_y = center_y
 
     def score(self):
         ...
@@ -146,3 +138,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# for i in range(len(self.segments_tail) - 1, 0, -1):
+#         tail = self.snake_tail[i]
+#         prev_tail = self.snake_tail[i - 1]
+#         dx = tail.center_x - prev_tail.center_x
+#         dy = tail.center_y - prev_tail.center_y
+#         if dx > 0:
+#             tail.center_x = prev_tail.center_x + 10
+#         elif dx < 0:
+#             tail.center_x = prev_tail.center_x - 10
+#         elif dy > 0:
+#             tail.center_y = prev_tail.center_y + 10
+#         elif dy < 0:
+#             tail.center_y = prev_tail.center_y - 10
+#         self.segments_tail[i] = (tail.center_x, tail.center_y)
