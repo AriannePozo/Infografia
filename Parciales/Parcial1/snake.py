@@ -1,15 +1,20 @@
 import arcade
 
 
-class Snake:
-    def __init__(self, center_x, center_y, width, height, color=arcade.color.DEEP_SKY_BLUE):
-        self.center_x = center_x
-        self.center_y = center_y
-        self.width = width
-        self.height = height
-        self.color = color
+class Snake(arcade.Sprite):
+    def __init__(self, image, scale, center_x, center_y):
+        super().__init__(image, scale, center_x=center_x, center_y=center_y)
+
         self.movement = 120
 
-    def draw(self):
-        arcade.draw_rectangle_filled(
-            self.center_x, self.center_y, self.width, self.height, self.color, 0)
+    def eat_food(self, food):
+        if self.collides_with_sprite(food):
+            return True
+        return False
+
+    def wall_collision(self, width, height):
+        if self.center_x <= 0 or self.center_x >= width or self.center_y <= 0 or self.center_y >= height:
+            print("snake muere pared")
+
+    def update(self):
+        ...
